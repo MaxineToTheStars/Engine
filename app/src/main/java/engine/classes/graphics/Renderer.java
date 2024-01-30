@@ -10,7 +10,7 @@ import engine.classes.graphics.Pixel;
 
 // Docstring
 /**
- * Renderer.java || Modified: 13/11/23
+ * Renderer.java || Modified: 30/01/24
  * Custom Graphics Rendering Pipeline
  * DO NOT TOUCH UNLESS YOU *KNOW* WHAT YOU'RE DOING
  * 
@@ -66,7 +66,7 @@ public class Renderer extends Thread {
 			// Try to sleep the thread
 			try {
 				// Sleep
-				Thread.sleep(Core._RENDERING_THREAD_UPDATE_DELAY);
+				Thread.sleep(Core.updateInterval);
 			} catch (InterruptedException exception) {
 				// Assume CTRL+C was hit, close the game
 				System.exit(-1);
@@ -124,8 +124,27 @@ public class Renderer extends Thread {
 	 * @return void
 	 */
 	private void _clearScreen() {
-		// Black magic is real
-		System.out.print("\033[H\033[2J");
+		// Check if on a *NIX or NT based system
+		final String currentPlatform = System.getProperty("os.name").toLowerCase();
+
+		// NT/Windows system
+		if (currentPlatform.contains("windows")) {
+			// Try to clear the screen
+			try {
+				// Clear the screen
+				Runtime.getRuntime().exec("cls");
+			} catch (Exception e) {
+				// Failed to clear
+				return;
+			}
+		}
+
+		// Applies to *NIX based systems
+		if (!currentPlatform.contains("windows")) {
+			System.out.print("\033[H\033[2J");
+		}
+
+		// Reset the cursor
 		System.out.flush();
 	}
 

@@ -77,7 +77,7 @@ public class InputHandler extends Thread {
 				// Try to sleep
 				try {
 					// Sleep
-					Thread.sleep(Core._INPUT_THREAD_UPDATE_DELAY);
+					Thread.sleep(Core.updateInterval);
 				} catch (InterruptedException exception2) {
 					// Assume CTRL+C was hit, close the game
 					System.exit(-1);
@@ -89,7 +89,7 @@ public class InputHandler extends Thread {
 				// Try to sleep
 				try {
 					// Sleep
-					Thread.sleep(Core._INPUT_THREAD_UPDATE_DELAY);
+					Thread.sleep(Core.updateInterval);
 				} catch (InterruptedException exception2) {
 					// Assume CTRL+C was hit, close the game
 					System.exit(-1);

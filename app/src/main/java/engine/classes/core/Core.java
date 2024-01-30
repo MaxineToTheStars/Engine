@@ -2,13 +2,16 @@
 package engine.classes.core;
 
 // Imports
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+
 import engine.game.classes.Game;
 import engine.classes.input.Input;
 import engine.classes.graphics.Graphics;
 
 // Docstring
 /**
- * Core.java || Modified: 13/11/23
+ * Core.java || Modified: 30/01/24
  * Core process of the game. Handles the instancing and initialization of
  * libraries and systems
  * 
@@ -24,10 +27,11 @@ public class Core {
 	// Interfaces
 
 	// Constants
-	public static final String VERSION_STRING = "v1.0.0";
-	public static final int _INPUT_THREAD_UPDATE_DELAY = 100;
-	public static final int _RENDERING_THREAD_UPDATE_DELAY = 100;
+	public static int updateInterval;
+	public static final String VERSION_STRING = "v1.1.0";
+	// public static final int _INPUT_THREAD_UPDATE_DELAY = 100; [Deprecated]
 	public static final int _INPUT_THREAD_MAXIMUM_BUFFER_SIZE = 2;
+	// public static final int _RENDERING_THREAD_UPDATE_DELAY = 100; [Deprecated]
 
 	// Public Variables
 
@@ -62,6 +66,18 @@ public class Core {
 	 * @return void
 	 */
 	public void init() {
+		// Get the current GraphicsEnvironment context
+		GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+
+		// Get currently attached display outputs
+		GraphicsDevice displayOutputsDevice = graphicsEnvironment.getDefaultScreenDevice();
+
+		// Get the current monitor refresh rate
+		int monitorRefreshRate = displayOutputsDevice.getDisplayMode().getRefreshRate();
+
+		// Get the needed update tick for constant 24Hz
+		Core.updateInterval = monitorRefreshRate / 24;
+
 		// Instance the libraries
 		this._libInput = new Input();
 		this._libGraphics = new Graphics(this._screenHeight, this._screenWidth);
@@ -101,10 +117,10 @@ public class Core {
 
 		// Show GitHub
 		this._libGraphics.drawText((this._screenHeight / 2) - 2, (this._screenWidth / 2),
-				"https://github.com/MaxineToTheStars", true);
+				"https://github.com/MaxineToTheStars/Engine", true);
 
 		// Show version (bottom left)
-		this._libGraphics.drawText(this._screenHeight - 2, (this._screenWidth - 1) - this.VERSION_STRING.length(),
+		this._libGraphics.drawText(this._screenHeight - 2, (this._screenWidth - 1) - Core.VERSION_STRING.length(),
 				VERSION_STRING, true);
 
 		// Try to sleep
