@@ -11,7 +11,7 @@ import engine.classes.graphics.Graphics;
 
 // Docstring
 /**
- * Core.java || Modified: 30/01/24
+ * Core.java || Modified: 31/01/24
  * Core process of the game. Handles the instancing and initialization of
  * libraries and systems
  * 
@@ -29,8 +29,8 @@ public class Core {
 	// Constants
 	public static int updateInterval;
 	public static final String VERSION_STRING = "v1.1.0";
-	// public static final int _INPUT_THREAD_UPDATE_DELAY = 100; [Deprecated]
 	public static final int _INPUT_THREAD_MAXIMUM_BUFFER_SIZE = 2;
+	// public static final int _INPUT_THREAD_UPDATE_DELAY = 100; [Deprecated]
 	// public static final int _RENDERING_THREAD_UPDATE_DELAY = 100; [Deprecated]
 
 	// Public Variables
