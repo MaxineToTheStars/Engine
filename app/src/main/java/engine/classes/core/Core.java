@@ -28,7 +28,7 @@ public class Core {
 
 	// Constants
 	public static int updateInterval;
-	public static final String VERSION_STRING = "v1.1.0";
+	public static final String VERSION_STRING = "v1.1.0-1";
 	public static final int _INPUT_THREAD_MAXIMUM_BUFFER_SIZE = 2;
 	// public static final int _INPUT_THREAD_UPDATE_DELAY = 100; [Deprecated]
 	// public static final int _RENDERING_THREAD_UPDATE_DELAY = 100; [Deprecated]

@@ -1,8 +1,8 @@
 // Package
 package engine.classes.io;
 
-import java.io.IOException;
 // Imports
+import java.io.IOException;
 import java.io.InputStream;
 
 // Docstring
