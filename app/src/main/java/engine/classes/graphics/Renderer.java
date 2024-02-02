@@ -3,6 +3,7 @@ package engine.classes.graphics;
 
 // Imports
 import java.lang.Thread;
+import java.lang.ProcessBuilder;
 import java.lang.InterruptedException;
 
 import engine.classes.core.Core;
@@ -10,7 +11,7 @@ import engine.classes.graphics.Pixel;
 
 // Docstring
 /**
- * Renderer.java || Modified: 30/01/24
+ * Renderer.java || Modified: 02/02/24
  * Custom Graphics Rendering Pipeline
  * DO NOT TOUCH UNLESS YOU *KNOW* WHAT YOU'RE DOING
  * 
@@ -131,8 +132,12 @@ public class Renderer extends Thread {
 		if (currentPlatform.contains("windows")) {
 			// Try to clear the screen
 			try {
-				// Clear the screen
-				Runtime.getRuntime().exec("cls");
+				// Create a new process
+				ProcessBuilder clearScreenProcessBuilder = new ProcessBuilder("cmd", "/c", "cls");
+
+				// Merge with main output channel
+				clearScreenProcessBuilder.inheritIO().start(); // .waitFor() <- Should not be needed as that will block
+																// the current thread
 			} catch (Exception e) {
 				// Failed to clear
 				return;

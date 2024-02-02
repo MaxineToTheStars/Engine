@@ -11,7 +11,7 @@ import engine.classes.graphics.Graphics;
 
 // Docstring
 /**
- * Core.java || Modified: 31/01/24
+ * Core.java || Modified: 02/02/24
  * Core process of the game. Handles the instancing and initialization of
  * libraries and systems
  * 
@@ -28,10 +28,8 @@ public class Core {
 
 	// Constants
 	public static int updateInterval;
-	public static final String VERSION_STRING = "v1.1.0-1";
+	public static final String VERSION_STRING = "v1.2.0";
 	public static final int _INPUT_THREAD_MAXIMUM_BUFFER_SIZE = 2;
-	// public static final int _INPUT_THREAD_UPDATE_DELAY = 100; [Deprecated]
-	// public static final int _RENDERING_THREAD_UPDATE_DELAY = 100; [Deprecated]
 
 	// Public Variables
 
@@ -75,8 +73,8 @@ public class Core {
 		// Get the current monitor refresh rate
 		int monitorRefreshRate = displayOutputsDevice.getDisplayMode().getRefreshRate();
 
-		// Get the needed update tick for constant 24Hz
-		Core.updateInterval = monitorRefreshRate / 24;
+		// Get the needed update tick for constant 12Hz
+		Core.updateInterval = monitorRefreshRate / 12;
 
 		// Instance the libraries
 		this._libInput = new Input();
@@ -126,7 +124,7 @@ public class Core {
 		// Try to sleep
 		try {
 			// Sleep
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 		} catch (InterruptedException exception) {
 			// Assume CTRL+C was hit, close the game
 			System.exit(-1);
